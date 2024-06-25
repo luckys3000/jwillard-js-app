@@ -9,3 +9,18 @@ pokemonList = [
 	{ name: 'Ninetales', height: '3\' 07"', type: ['fire'] },
 	{ name: 'Vileplume', height: '3\' 11"', type: ['grass', 'poison'] },
 ];
+
+//Create a for loop that will loop through the array and print out the name of each pokemon in the array.
+for (let i = 0; i < pokemonList.length; i++) {
+	let pokemon = pokemonList[i];
+
+	//Create a variable heightInInches which converts a height string in the format "feet'inches "" to inches
+	let heightInInches = parseInt(pokemon.height.split("' ")[0]) * 12 + parseInt(pokemon.height.split("' ")[1].replace('"', ''));
+
+	//Create conditional expression that will print the name and height of all Pokemon and adds text string to the tallest Pokemon
+	if (heightInInches > 63 && heightInInches < 75) {
+		document.write(pokemon.name + ' (Height: ' + pokemon.height + ')', ' - Wow, that’s big! ' + '<br>');
+	} else {
+		document.write(pokemon.name + ' (Height: ' + pokemon.height + ')' + '<br>');
+	}
+}
