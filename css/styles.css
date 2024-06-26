@@ -1,0 +1,50 @@
+/* CSS HEX Color Palette
+    --primary-color: #060678ff;
+    --background-color: #f5f4f5ff;
+    --link-color: #d00000ff;
+    --visited-link: #0bad39ff;
+    --accent-orange: #f18f01ff;
+    --accent-blue: #0c0ce9ff;
+    --gridTile-Ltgray: #d3d3d3;
+    --sunStart: #edc655;
+    --sunHalf: #fcffad;
+    --sunEnd: #f76414;
+ */
+
+:root {
+	--primary-color: #060678ff;
+	--background-color: #f5f4f5ff;
+	--link-color: #d00000ff;
+	--visited-link: #0bad39ff;
+	--accent-orange: #f18f01ff;
+	--accent-blue: #0c0ce9ff;
+	--gridTile-Ltgray: #d3d3d3;
+	--sunStart: #edc655;
+	--sunHalf: #fcffad;
+	--sunEnd: #f76414;
+	--heading-fontWeight: 700;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.page-header {
+	display: flex;
+	width: 100%;
+	padding: 20px;
+}
+
+.page-header__item {
+	flex: 0 1 200px;
+}
+
+body {
+	background-color: var(--background-color);
+	font-family: 'sulpher point', sans-serif;
+	font-weight: 400;
+	/*Sets the font size to 16px */
+	font-size: 16px;
+	/*Sets the line-height to 1.6 */
+	line-height: 1.6;
+}
