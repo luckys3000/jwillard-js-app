@@ -10,10 +10,8 @@ pokemonList = [
 	{ name: 'Vileplume', height: '3\' 11"', type: ['grass', 'poison'] },
 ];
 
-//Create a for loop that will loop through the array and print out the name of each pokemon in the array.
-for (let i = 0; i < pokemonList.length; i++) {
-	let pokemon = pokemonList[i];
-
+// Iterate over each element in the pokemonList array, assigning each element to the variable 'pokemon'
+pokemonList.forEach(function (pokemon) {
 	//Create a variable heightInInches which converts a height string in the format "feet'inches "" to inches
 	let heightInInches = parseInt(pokemon.height.split("' ")[0]) * 12 + parseInt(pokemon.height.split("' ")[1].replace('"', ''));
 
@@ -23,4 +21,4 @@ for (let i = 0; i < pokemonList.length; i++) {
 	} else {
 		document.write(pokemon.name + ' (Height: ' + pokemon.height + ')' + '<br>');
 	}
-}
+});
