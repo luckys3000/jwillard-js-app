@@ -36,15 +36,40 @@
 }
 
 .page-header__item {
-	flex: 0 1 200px;
+	flex: 0 1 100px;
 }
 
 body {
 	background-color: var(--background-color);
 	font-family: 'sulpher point', sans-serif;
 	font-weight: 400;
-	/*Sets the font size to 16px */
 	font-size: 16px;
-	/*Sets the line-height to 1.6 */
 	line-height: 1.6;
+	margin: 0; /* Ensure no default margin */
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* Center content vertically */
+	min-height: 100vh; /* Full viewport height */
+	text-align: center; /* Center text */
+}
+
+.pokemon-list {
+	list-style: none;
+	padding: 16px 32px;
+	margin: 4px 2px;
+}
+
+.button-class {
+	background-color: var(--accent-orange);
+	border: 2px solid blue;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	width: 150px; /* Set a fixed width */
+	box-sizing: border-box; /* Ensure padding and border are included in the width */
 }
