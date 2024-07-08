@@ -12,6 +12,8 @@
 
 -   JavaScript ES6
 -   HTML & CSS
+-   [Fetch polyfill](https://github.com/JakeChampion/fetch?tab=readme-ov-file)
+-   [Promise polyfill](https://github.com/taylorhakes/promise-polyfill)
 
 # Credits
 
