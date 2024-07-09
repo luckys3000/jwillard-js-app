@@ -3,14 +3,17 @@ let pokemonRepository = (function () {
 	let pokemonList = [];
 	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=1025';
 
+	// Function to capitalize the first letter of a string
+	function capitalizeFirstLetter(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
 	//Function to add a new pokemon to the pokemonList array
 	function add(pokemon) {
 		//Check if the parameter is an object
-		if (
-			typeof pokemon === 'object' &&
-			'name' in pokemon
-			// 'detailsUrl' in pokemon'
-		) {
+		if (typeof pokemon === 'object' && 'name' in pokemon) {
+			// Capitalize the first letter of the pokemon name
+			pokemon.name = capitalizeFirstLetter(pokemon.name);
 			pokemonList.push(pokemon);
 		} else {
 			console.log('Error: Pokemon is not correct');
