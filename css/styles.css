@@ -1,16 +1,4 @@
-/* CSS HEX Color Palette
-    --primary-color: #060678ff;
-    --background-color: #f5f4f5ff;
-    --link-color: #d00000ff;
-    --visited-link: #0bad39ff;
-    --accent-orange: #f18f01ff;
-    --accent-blue: #0c0ce9ff;
-    --gridTile-Ltgray: #d3d3d3;
-    --sunStart: #edc655;
-    --sunHalf: #fcffad;
-    --sunEnd: #f76414;
- */
-
+/* CSS HEX Color Palette */
 :root {
 	--primary-color: #060678ff;
 	--background-color: #f5f4f5ff;
@@ -41,7 +29,7 @@
 
 body {
 	background-color: var(--background-color);
-	font-family: 'sulpher point', sans-serif;
+	font-family: 'Sulpher Point', sans-serif;
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 1.6;
@@ -54,9 +42,17 @@ body {
 }
 
 .pokemon-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 	list-style: none;
 	padding: 16px 32px;
 	margin: 4px 2px;
+}
+
+.pokemon-list li {
+	flex: 1 1 calc(25% - 10px); /* 4 columns */
+	margin: 5px;
 }
 
 .button-class {
@@ -66,10 +62,10 @@ body {
 	padding: 16px 32px;
 	text-align: center;
 	text-decoration: none;
-	display: inline-block;
+	display: block;
 	font-size: 16px;
-	margin: 4px 2px;
+	margin: 0; /* Remove default margin */
 	cursor: pointer;
-	width: 150px; /* Set a fixed width */
+	width: 100%; /* Ensure full width of the flex item */
 	box-sizing: border-box; /* Ensure padding and border are included in the width */
 }
