@@ -14,6 +14,7 @@
 -   HTML & CSS
 -   [Fetch polyfill](https://github.com/JakeChampion/fetch?tab=readme-ov-file)
 -   [Promise polyfill](https://github.com/taylorhakes/promise-polyfill)
+-   [Pokemon API](https://pokeapi.co/api/v2/pokemon/?limit=1025)
 
 # Credits
 
