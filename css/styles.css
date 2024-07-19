@@ -13,140 +13,18 @@
 	--heading-fontWeight: 700;
 }
 
-* {
-	box-sizing: border-box;
-}
-
 body {
-	background-color: var(--background-color);
-	font-family: 'Sulpher Point', sans-serif;
-	font-weight: 400;
-	font-size: 16px;
-	line-height: 1.6;
-	margin: 0;
-	/* Ensure no default margin */
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	/* Center content vertically */
-	min-height: 100vh;
-	/* Full viewport height */
 	text-align: center;
-	/* Center text */
 }
 
-.page-header {
-	display: flex;
-	width: 100%;
-	padding: 20px;
+h1 {
+	color: var(--accent-blue);
+	padding: 30px;
 }
 
-.page-title {
-	font-size: 2rem;
+/* Name element on button  */
+span {
 	font-weight: var(--heading-fontWeight);
-	margin: 0;
-	padding: 0;
-}
-
-.page-header__item {
-	flex: 0 1 100px;
-}
-
-.container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	list-style: none;
-	padding: 16px 32px;
-	margin: 4px 2px;
-}
-
-.pokemon-list {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	list-style: none;
-	padding: 16px 32px;
-	margin: 4px 2px;
-}
-
-.pokemon-list li {
-	flex: 1 1 calc(25% - 10px);
-	/* 4 columns */
-	margin: 5px;
-}
-
-.pokemon-list__button {
-	background-color: var(--accent-orange);
-	border: 2px solid blue;
-	color: white;
-	padding: 16px 32px;
-	text-align: center;
-	text-decoration: none;
-	display: block;
-	font-size: 16px;
-	margin: 0;
-	/* Remove default margin */
-	cursor: pointer;
-	width: 100%;
-	/* Ensure full width of the flex item */
-	box-sizing: border-box;
-	/* Ensure padding and border are included in the width */
-}
-
-#modal-container {
-	display: none;
-}
-
-#modal-container.is-visible {
-	position: fixed;
-	padding: 20px;
-	box-sizing: border-box;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
-	/* to show it above other content */
-	z-index: 999;
-	/* to allow scrolling if the screen is not high enough*/
-	overflow: auto;
-	/* this is used to center the modal */
-	display: grid;
-	text-align: center;
-}
-
-.modal {
-	margin: auto;
-	display: inline-block;
-	box-sizing: border-box;
-	background: #fff;
-	padding: 15px;
-	width: 100%;
-	max-width: 700px;
-	text-align: left;
-}
-
-.modal-close {
-	float: right;
-	border: 0;
-	background: none;
-	color: #777;
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-.modal img {
-	width: 100%;
-	max-width: 200px;
-	display: block;
-	margin: 0 auto;
-}
-
-.modal h1 {
-	margin-top: 0;
-}
-
-.modal p {
-	margin-bottom: 0;
+	font-size: 2.5em;
+	color: var(--accent-orange);
 }
