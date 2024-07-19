@@ -12,7 +12,9 @@
 
 -   JavaScript ES6
 -   HTML & CSS
--   jQuery 3.7.1 CDN
+-   jQuery 3.3.1.min CDN
+-   Bootstrap 4.3.1 CDN
+-   Popper 1.14.7 CDN
 -   [Fetch polyfill](https://github.com/JakeChampion/fetch?tab=readme-ov-file)
 -   [Promise polyfill](https://github.com/taylorhakes/promise-polyfill)
 -   [Pokemon API](https://pokeapi.co/api/v2/pokemon/?limit=1025)
