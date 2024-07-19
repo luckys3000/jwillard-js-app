@@ -1,7 +1,7 @@
-//create pokemonRepository variable to hold what IIFE will return
 let pokemonRepository = (function () {
 	let pokemonList = [];
-	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=1025';
+	let limit = 12;
+	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=${limit}';
 
 	// Function to capitalize the first letter of a string
 	function capitalizeFirstLetter(string) {
@@ -21,9 +21,9 @@ let pokemonRepository = (function () {
 		return pokemonList;
 	}
 
-	//Function to add a new pokemon to the pokemonList array
+	// Function to add a new pokemon to the pokemonList array
 	function add(pokemon) {
-		//Check if the parameter is an object
+		// Check if the parameter is an object
 		if (typeof pokemon === 'object' && 'name' in pokemon) {
 			// Capitalize the first letter of the pokemon name
 			pokemon.name = capitalizeFirstLetter(pokemon.name);
@@ -39,7 +39,9 @@ let pokemonRepository = (function () {
 				return response.json();
 			})
 			.then(function (json) {
-				json.results.forEach(function (item) {
+				apiUrl = json.next;
+
+				const results = json.results.map(function (item) {
 					let pokemon = {
 						name: item.name,
 						detailsUrl: item.url,
@@ -63,7 +65,7 @@ let pokemonRepository = (function () {
 				item.imageUrl = details.sprites.other.home.front_default;
 				item.height = details.height;
 				item.types = details.types.map((typeInfo) => typeInfo.type.name);
-				//Returns National Pokedex Number
+				// Returns National Pokedex Number
 				item.id = details.id;
 			})
 			.catch(function (e) {
@@ -71,19 +73,39 @@ let pokemonRepository = (function () {
 			});
 	}
 
-	//Function to add a list item to the pokemon-list unordered list
+	// Function to add a list item to the pokemon-list unordered list
 	function addListItem(pokemon) {
-		let listItem = document.createElement('li');
-		let button = document.createElement('button');
-		button.innerText = pokemon.name;
-		button.classList.add('pokemon-list__button');
-		// Add event listener to the button
-		addEventListener(button, pokemon);
+		loadDetails(pokemon).then(() => {
+			let col = document.createElement('div');
+			col.classList.add('col-12', 'col-sm-6', 'col-md-4', 'col-lg-3', 'mb-4');
 
-		listItem.appendChild(button);
+			let listItem = document.createElement('li');
+			listItem.classList.add('list-group-item', 'p-0', 'text-center');
 
-		let list = document.querySelector('.pokemon-list');
-		list.appendChild(listItem);
+			let button = document.createElement('button');
+			button.classList.add('btn', 'btn-primary', 'btn-block');
+			button.setAttribute('data-toggle', 'modal');
+			button.setAttribute('data-target', '#pokemonModal');
+
+			let img = document.createElement('img');
+			img.src = pokemon.imageUrl;
+			img.alt = pokemon.name;
+			img.classList.add('img-fluid', 'mb-2');
+
+			let span = document.createElement('span');
+			span.innerText = pokemon.name;
+
+			// Add event listener to the button
+			addEventListener(button, pokemon);
+
+			button.appendChild(span);
+			button.appendChild(img);
+			listItem.appendChild(button);
+			col.appendChild(listItem);
+
+			let list = document.querySelector('.pokemon-list');
+			list.appendChild(col);
+		});
 	}
 
 	function addEventListener(button, pokemon) {
@@ -99,73 +121,33 @@ let pokemonRepository = (function () {
 	}
 
 	function showModal(pokemon) {
-		let modalContainer = document.querySelector('#modal-container');
-		// Clear all exisiting modal content
-		modalContainer.innerHTML = '';
+		let modalTitle = document.querySelector('#pokemonModalLabel');
+		let modalImage = document.querySelector('#pokemon-image');
+		let modalName = document.querySelector('#pokemon-name');
+		let modalId = document.querySelector('#pokemon-id');
+		let modalHeight = document.querySelector('#pokemon-height');
+		let modalTypes = document.querySelector('#pokemon-types');
 
-		let modal = document.createElement('div');
-		modal.classList.add('modal');
-
-		// Add the new modal content
-		let closeButtonElement = document.createElement('button');
-		closeButtonElement.classList.add('modal-close');
-		closeButtonElement.innerText = 'Close';
-		closeButtonElement.addEventListener('click', hideModal);
-
-		let titleElement = document.createElement('h1');
-		titleElement.innerText = pokemon.name;
-
-		let imageElement = document.createElement('img');
-		imageElement.src = pokemon.imageUrl;
-
-		let idElement = document.createElement('p');
-		idElement.innerText = 'National Pokedex Number: ' + pokemon.id;
-
-		let heightElement = document.createElement('p');
-		heightElement.innerText = 'Height: ' + convertDecimetersToFeetInches(pokemon.height);
-
-		let typesElement = document.createElement('p');
-		// Capiatalize the first letter of each type
-		typesElement.innerText = pokemon.types.map(capitalizeFirstLetter).join(', ');
-
-		modal.appendChild(closeButtonElement);
-		modal.appendChild(titleElement);
-		modal.appendChild(imageElement);
-		modal.appendChild(idElement);
-		modal.appendChild(heightElement);
-		modal.appendChild(typesElement);
-		modalContainer.appendChild(modal);
-
-		modalContainer.classList.add('is-visible');
-
-		modalContainer.addEventListener('click', (e) => {
-			let target = e.target;
-			if (target === modalContainer) {
-				hideModal();
-			}
-		});
+		modalTitle.innerText = pokemon.name;
+		modalImage.src = pokemon.imageUrl;
+		modalName.innerText = pokemon.name;
+		modalId.innerText = 'National Pokedex Number: ' + pokemon.id;
+		modalHeight.innerText = 'Height: ' + convertDecimetersToFeetInches(pokemon.height);
+		modalTypes.innerText = 'Types: ' + pokemon.types.map(capitalizeFirstLetter).join(', ');
 	}
-
-	function hideModal() {
-		let modalContainer = document.querySelector('#modal-container');
-		modalContainer.classList.remove('is-visible');
-	}
-
-	window.addEventListener('keydown', (e) => {
-		let modalContainer = document.querySelector('#modal-container');
-		if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-			hideModal();
-		}
+	// Load more button event listener
+	document.querySelector('#load-more').addEventListener('click', async () => {
+		await loadList();
+		pokemonList.slice(-limit).forEach((pokemon) => addListItem(pokemon));
 	});
 
-	//Return an object with reference to functionality inside the IIFE
+	// Return an object with reference to functionality inside the IIFE
 	return {
 		add: add,
 		getAll: getAll,
 		addListItem: addListItem,
 		loadList: loadList,
 		loadDetails: loadDetails,
-		hideModal: hideModal,
 	};
 })();
 
