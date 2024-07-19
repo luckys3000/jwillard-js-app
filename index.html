@@ -16,7 +16,7 @@
 <body>
   <header>
     <!-- Header including the logo and the main navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
       <a class="navbar-brand" href="#">
         <img src="img/jpw_codes_blue_logo_80px.svg" width="80" height="80"
           alt="Personal logo of Jeffrey Willard consisting of text and a symbol.">
@@ -43,12 +43,12 @@
   </div>
 
   <main class="container">
-    <div class="row pokemon-list"></div>
+    <div class="row pokemon-list" role="list"></div>
 
-    <nav class="mb-5">
+    <nav aria-label="Load more Pokemon" class="mb-5">
       <ul class="pagination justify-content-center">
         <li class="page-item">
-          <button type="button" class="btn btn-lg btn-primary" id="load-more">Load more Pokémon</button>
+          <button type="button" class="btn btn-lg btn-primary" id="load-more" aria-label="Load more Pokemon">Load more Pokémon</button>
         </li>
       </ul>
     </nav>
@@ -66,7 +66,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <img id="pokemon-image" class="img-fluid" alt="Pokemon image">
+          <img id="pokemon-image" class="img-fluid" alt="Image of selected Pokemon">
           <h1 id="pokemon-name"></h1>
           <p id="pokemon-id"></p>
           <p id="pokemon-height"></p>
