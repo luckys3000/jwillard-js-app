@@ -1,11 +1,11 @@
 (function (global, factory) {
-  typeof exports === "object" && typeof module !== "undefined"
+  typeof exports === 'object' && typeof module !== 'undefined'
     ? factory()
-    : typeof define === "function" && define.amd
+    : typeof define === 'function' && define.amd
       ? define(factory)
       : factory();
 })(this, function () {
-  "use strict";
+  'use strict';
 
   /**
    * @this {Promise}
@@ -32,13 +32,13 @@
   function allSettled(arr) {
     var P = this;
     return new P(function (resolve, reject) {
-      if (!(arr && typeof arr.length !== "undefined")) {
+      if (!(arr && typeof arr.length !== 'undefined')) {
         return reject(
           new TypeError(
             typeof arr +
-              " " +
+              ' ' +
               arr +
-              " is not iterable(cannot read property Symbol(Symbol.iterator))",
+              ' is not iterable(cannot read property Symbol(Symbol.iterator))',
           ),
         );
       }
@@ -47,16 +47,16 @@
       var remaining = args.length;
 
       function res(i, val) {
-        if (val && (typeof val === "object" || typeof val === "function")) {
+        if (val && (typeof val === 'object' || typeof val === 'function')) {
           var then = val.then;
-          if (typeof then === "function") {
+          if (typeof then === 'function') {
             then.call(
               val,
               function (val) {
                 res(i, val);
               },
               function (e) {
-                args[i] = { status: "rejected", reason: e };
+                args[i] = { status: 'rejected', reason: e };
                 if (--remaining === 0) {
                   resolve(args);
                 }
@@ -65,7 +65,7 @@
             return;
           }
         }
-        args[i] = { status: "fulfilled", value: val };
+        args[i] = { status: 'fulfilled', value: val };
         if (--remaining === 0) {
           resolve(args);
         }
@@ -81,16 +81,16 @@
    * @constructor
    */
   function AggregateError(errors, message) {
-    (this.name = "AggregateError"), (this.errors = errors);
-    this.message = message || "";
+    (this.name = 'AggregateError'), (this.errors = errors);
+    this.message = message || '';
   }
   AggregateError.prototype = Error.prototype;
 
   function any(arr) {
     var P = this;
     return new P(function (resolve, reject) {
-      if (!(arr && typeof arr.length !== "undefined")) {
-        return reject(new TypeError("Promise.any accepts an array"));
+      if (!(arr && typeof arr.length !== 'undefined')) {
+        return reject(new TypeError('Promise.any accepts an array'));
       }
 
       var args = Array.prototype.slice.call(arr);
@@ -107,7 +107,7 @@
                 reject(
                   new AggregateError(
                     rejectionReasons,
-                    "All promises were rejected",
+                    'All promises were rejected',
                   ),
                 );
               }
@@ -124,7 +124,7 @@
   var setTimeoutFunc = setTimeout;
 
   function isArray(x) {
-    return Boolean(x && typeof x.length !== "undefined");
+    return Boolean(x && typeof x.length !== 'undefined');
   }
 
   function noop() {}
@@ -142,8 +142,8 @@
    */
   function Promise(fn) {
     if (!(this instanceof Promise))
-      throw new TypeError("Promises must be constructed via new");
-    if (typeof fn !== "function") throw new TypeError("not a function");
+      throw new TypeError('Promises must be constructed via new');
+    if (typeof fn !== 'function') throw new TypeError('not a function');
     /** @type {!number} */
     this._state = 0;
     /** @type {!boolean} */
@@ -186,10 +186,10 @@
     try {
       // Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
       if (newValue === self)
-        throw new TypeError("A promise cannot be resolved with itself.");
+        throw new TypeError('A promise cannot be resolved with itself.');
       if (
         newValue &&
-        (typeof newValue === "object" || typeof newValue === "function")
+        (typeof newValue === 'object' || typeof newValue === 'function')
       ) {
         var then = newValue.then;
         if (newValue instanceof Promise) {
@@ -197,7 +197,7 @@
           self._value = newValue;
           finale(self);
           return;
-        } else if (typeof then === "function") {
+        } else if (typeof then === 'function') {
           doResolve(bind(then, newValue), self);
           return;
         }
@@ -235,8 +235,8 @@
    * @constructor
    */
   function Handler(onFulfilled, onRejected, promise) {
-    this.onFulfilled = typeof onFulfilled === "function" ? onFulfilled : null;
-    this.onRejected = typeof onRejected === "function" ? onRejected : null;
+    this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null;
+    this.onRejected = typeof onRejected === 'function' ? onRejected : null;
     this.promise = promise;
   }
 
@@ -268,7 +268,7 @@
     }
   }
 
-  Promise.prototype["catch"] = function (onRejected) {
+  Promise.prototype['catch'] = function (onRejected) {
     return this.then(null, onRejected);
   };
 
@@ -280,12 +280,12 @@
     return prom;
   };
 
-  Promise.prototype["finally"] = finallyConstructor;
+  Promise.prototype['finally'] = finallyConstructor;
 
   Promise.all = function (arr) {
     return new Promise(function (resolve, reject) {
       if (!isArray(arr)) {
-        return reject(new TypeError("Promise.all accepts an array"));
+        return reject(new TypeError('Promise.all accepts an array'));
       }
 
       var args = Array.prototype.slice.call(arr);
@@ -294,9 +294,9 @@
 
       function res(i, val) {
         try {
-          if (val && (typeof val === "object" || typeof val === "function")) {
+          if (val && (typeof val === 'object' || typeof val === 'function')) {
             var then = val.then;
-            if (typeof then === "function") {
+            if (typeof then === 'function') {
               then.call(
                 val,
                 function (val) {
@@ -327,7 +327,7 @@
   Promise.allSettled = allSettled;
 
   Promise.resolve = function (value) {
-    if (value && typeof value === "object" && value.constructor === Promise) {
+    if (value && typeof value === 'object' && value.constructor === Promise) {
       return value;
     }
 
@@ -345,7 +345,7 @@
   Promise.race = function (arr) {
     return new Promise(function (resolve, reject) {
       if (!isArray(arr)) {
-        return reject(new TypeError("Promise.race accepts an array"));
+        return reject(new TypeError('Promise.race accepts an array'));
       }
 
       for (var i = 0, len = arr.length; i < len; i++) {
@@ -357,7 +357,7 @@
   // Use polyfill for setImmediate for performance gains
   Promise._immediateFn =
     // @ts-ignore
-    (typeof setImmediate === "function" &&
+    (typeof setImmediate === 'function' &&
       function (fn) {
         // @ts-ignore
         setImmediate(fn);
@@ -367,8 +367,8 @@
     };
 
   Promise._unhandledRejectionFn = function _unhandledRejectionFn(err) {
-    if (typeof console !== "undefined" && console) {
-      console.warn("Possible Unhandled Promise Rejection:", err); // eslint-disable-line no-console
+    if (typeof console !== 'undefined' && console) {
+      console.warn('Possible Unhandled Promise Rejection:', err); // eslint-disable-line no-console
     }
   };
 
@@ -377,27 +377,27 @@
     // the only reliable means to get the global object is
     // `Function('return this')()`
     // However, this causes CSP violations in Chrome apps.
-    if (typeof self !== "undefined") {
+    if (typeof self !== 'undefined') {
       return self;
     }
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       return window;
     }
-    if (typeof global !== "undefined") {
+    if (typeof global !== 'undefined') {
       return global;
     }
-    throw new Error("unable to locate global object");
+    throw new Error('unable to locate global object');
   })();
 
   // Expose the polyfill if Promise is undefined or set to a
   // non-function value. The latter can be due to a named HTMLElement
   // being exposed by browsers for legacy reasons.
   // https://github.com/taylorhakes/promise-polyfill/issues/114
-  if (typeof globalNS["Promise"] !== "function") {
-    globalNS["Promise"] = Promise;
+  if (typeof globalNS['Promise'] !== 'function') {
+    globalNS['Promise'] = Promise;
   } else {
-    if (!globalNS.Promise.prototype["finally"]) {
-      globalNS.Promise.prototype["finally"] = finallyConstructor;
+    if (!globalNS.Promise.prototype['finally']) {
+      globalNS.Promise.prototype['finally'] = finallyConstructor;
     }
     if (!globalNS.Promise.allSettled) {
       globalNS.Promise.allSettled = allSettled;

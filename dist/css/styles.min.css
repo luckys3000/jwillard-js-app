@@ -1,25 +1,25 @@
 :root {
-	--primary-color: #060678ff;
-	--background-color: #f5f4f5ff;
-	--link-color: #d00000ff;
-	--visited-link: #0bad39ff;
-	--accent-orange: #f18f01ff;
-	--accent-blue: #0c0ce9ff;
-	--gridTile-Ltgray: #d3d3d3;
-	--sunStart: #edc655;
-	--sunHalf: #fcffad;
-	--sunEnd: #f76414;
-	--heading-fontWeight: 700;
+  --primary-color: #060678ff;
+  --background-color: #f5f4f5ff;
+  --link-color: #d00000ff;
+  --visited-link: #0bad39ff;
+  --accent-orange: #f18f01ff;
+  --accent-blue: #0c0ce9ff;
+  --gridTile-Ltgray: #d3d3d3;
+  --sunStart: #edc655;
+  --sunHalf: #fcffad;
+  --sunEnd: #f76414;
+  --heading-fontWeight: 700;
 }
 body {
-	text-align: center;
+  text-align: center;
 }
 h1 {
-	color: var(--accent-blue);
-	padding: 30px;
+  color: var(--accent-blue);
+  padding: 30px;
 }
 span {
-	font-weight: var(--heading-fontWeight);
-	font-size: 2.5em;
-	color: var(--accent-orange);
+  font-weight: var(--heading-fontWeight);
+  font-size: 2.5em;
+  color: var(--accent-orange);
 }
