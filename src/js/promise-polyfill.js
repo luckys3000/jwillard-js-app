@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined'
     ? factory()
